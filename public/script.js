@@ -14,25 +14,35 @@ let myVideoStream;
 navigator.mediaDevices
   .getUserMedia({
     video: true,
-    audio: true,
+    audio: false,
   })
   .then((stream) => {
     myVideoStream = stream;
     addVideoStream(myVideo, stream);
+
+    peer.on("call", (call) => {
+      call.answer(stream);
+      const video = document.createElement("video");
+      call.on("stream", (userVideoStream) => {
+        addVideoStream(video, userVideoStream);
+      });
+    });
+
+    socket.on("user-connected", (userId) => {
+      connectNewUser(userId, stream);
+    });
   });
 
 peer.on("open", (id) => {
-  socket.emit("join-room", ROOM_ID,id);
+  socket.emit("join-room", ROOM_ID, id);
 });
 
-socket.emit("join-room", ROOM_ID);
-
-socket.on("user-connected", (userId) => {
-  connectNewUser(userId);
-});
-
-const connectNewUser = (userId) => {
-  console.log("new-user",userId);
+const connectNewUser = (userId, stream) => {
+  const call = peer.call(userId, stream);
+  const video = document.createElement("video");
+  call.on("stream", (userVideoStream) => {
+    addVideoStream(video, userVideoStream);
+  });
 };
 
 const addVideoStream = (video, stream) => {

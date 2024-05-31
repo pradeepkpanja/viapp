@@ -1,10 +1,50 @@
+*{
+    margin: 0;
+    padding: 0;
+    
+}
+body{
+    font-family: sans-serif;
+}
 #video-grid{
     display: flex;
     justify-content: center;
-
 }
 
-video{
+video {
     height: 50vh;
-    width: 50vw;
+    width: 450px;
+    border-radius: 40px; /* Properly rounded corners */
+    border: none;
+    outline: none; 
+}
+
+
+.main{
+    display: flex;
+    height: 100vh;
+}
+
+.main_left{
+    flex: 0.8;
+    display: flex;
+    flex-direction: column;
+}
+
+.main_right{
+    flex: 0.2;;
+}
+
+.main_videos{
+    flex-grow: 1;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main_controls{
+    background-color: #1c1e20;
+    display: flex;
+    
 }

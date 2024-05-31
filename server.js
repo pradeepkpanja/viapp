@@ -9,6 +9,7 @@ const { v4: uuidv4 } = require("uuid");
 const peerServer = ExpressPeerServer(server, {
   debug: true,
 });
+
 app.use("/peerjs", peerServer);
 
 //set public files to be here
@@ -27,9 +28,9 @@ app.get("/:room", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  socket.on("join-room", (roomId,userId) => {
+  socket.on("join-room", (roomId, userId) => {
     socket.join(roomId);
-    socket.to(roomId).emit("user-connected",userId);
+    socket.to(roomId).emit("user-connected", userId);
   });
 });
 
