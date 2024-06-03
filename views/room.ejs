@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/style.css" />
     <script src="/socket.io/socket.io.js"></script>
     <script src="script.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
     <script
       src="https://kit.fontawesome.com/9d8f04bf6c.js"
@@ -38,11 +39,11 @@
           </div>
 
           <div class="main_controls_block">
-            <div class="main_controls_button">
+            <div onclick="muteUnmute()" class="main_controls_button main_mute_button">
               <i class="fa-solid fa-microphone"></i>
               <span>Mute</span>
             </div>
-            <div class="main_controls_button">
+            <div onclick="playStop()" class="main_controls_button main_video_button">
               <i class="fa-solid fa-video"></i>
               <span>Stop Video</span>
             </div>
@@ -65,6 +66,16 @@
       <div class="main_right">
         <div class="main_header">
           <h3>Chat</h3>
+        </div>
+        <div class="main_chat_window ">
+          <ul class="messages"></ul>
+        </div>
+        <div class="main_message_container">
+          <input
+            type="text"
+            id="chat_message"
+            placeholder="Type Message Here..."
+          />
         </div>
       </div>
     </div>
